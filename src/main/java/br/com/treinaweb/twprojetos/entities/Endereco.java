@@ -1,14 +1,12 @@
 package br.com.treinaweb.twprojetos.entities;
 
-import javax.persistence.*;
-import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Entity
-public class Endereco {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Endereco extends Entidade {
 
     @Column(nullable = false, length = 2)
     @Enumerated(EnumType.STRING)
@@ -52,27 +50,6 @@ public class Endereco {
 
         return enderecoCompleto.toString();
 
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Endereco endereco = (Endereco) o;
-        return Objects.equals(id, endereco.id) && uf == endereco.uf && Objects.equals(cidade, endereco.cidade) && Objects.equals(bairro, endereco.bairro) && Objects.equals(logradouro, endereco.logradouro) && Objects.equals(cep, endereco.cep) && Objects.equals(numero, endereco.numero) && Objects.equals(complemento, endereco.complemento);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, uf, cidade, bairro, logradouro, cep, numero, complemento);
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public UF getUf() {
