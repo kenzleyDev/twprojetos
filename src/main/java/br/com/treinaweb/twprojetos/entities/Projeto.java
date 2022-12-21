@@ -25,13 +25,13 @@ public class Projeto extends Entidade {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dataFim;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id_fk", nullable = false)
     private Cliente cliente;
 
-    @ManyToOne
-    @JoinColumn(name = "lidar_id_fk", nullable = false)
-    private Funcionario funcionario;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lider_id_fk", nullable = false)
+    private Funcionario lider;
 
     @Column(nullable = false)
     @NumberFormat(style = NumberFormat.Style.CURRENCY, pattern = "#,##0.00")
@@ -89,12 +89,12 @@ public class Projeto extends Entidade {
         this.cliente = cliente;
     }
 
-    public Funcionario getFuncionario() {
-        return funcionario;
+    public Funcionario getLider() {
+        return lider;
     }
 
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
+    public void setLider(Funcionario lider) {
+        this.lider = lider;
     }
 
     public BigDecimal getOrcamento() {
