@@ -13,6 +13,9 @@
           <!-- /.card-header -->
           <!-- form start -->
           <form method="POST" th:object="${cargo}">
+
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
             <div class="card-body">
                 <input type="hidden" th:field="*{id}">
 
@@ -21,6 +24,9 @@
                     <div class="form-group">
                       <label for="nome">Nome</label>
                       <input type="text" class="form-control" placeholder="Desenvolvedor(a) Front End Jr" th:field="*{nome}">
+                      <ul>
+                        <li class="text-danger" th:each="erro : ${#fields.errors('nome')}" th:text="${erro}"></li>
+                      </ul>
                     </div>
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-package br.com.treinaweb.twprojetos.entities;
+package br.com.treinaweb.twprojetos.enums;
 
 public enum UF {
 

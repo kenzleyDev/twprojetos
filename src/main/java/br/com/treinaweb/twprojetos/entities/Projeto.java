@@ -4,6 +4,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -11,32 +15,41 @@ import java.util.List;
 @Entity
 public class Projeto extends Entidade {
 
+    @NotNull
+    @Size(min = 3, max = 255)
+
     @Column(nullable = false)
     private String nome;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String descricao;
 
+    @NotNull
+    @PastOrPresent
     @Column(name = "data_inicio", nullable = false)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dataInicio;
-
+    @PastOrPresent
     @Column(name = "data_fim")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dataFim;
 
+    @Valid
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id_fk", nullable = false)
     private Cliente cliente;
-
+    @Valid
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lider_id_fk", nullable = false)
     private Funcionario lider;
 
+    @NotNull
     @Column(nullable = false)
     @NumberFormat(style = NumberFormat.Style.CURRENCY, pattern = "#,##0.00")
     private BigDecimal orcamento;
 
+    @NotNull
     @Column(nullable = false)
     @NumberFormat(style = NumberFormat.Style.CURRENCY, pattern = "#,##0.00")
     private BigDecimal gastos;

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
     @EntityGraph(attributePaths = {"endereco", "cargo"})
@@ -20,4 +21,8 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> 
     List<Funcionario> findByCargoNome(String cargoNome);
 
     List<Funcionario> findByCargoNomeNot(String cargoNome);
+
+    Optional<Funcionario> findByEmail(String email);
+
+    Optional<Funcionario> findByCpf(String cpf);
 }
