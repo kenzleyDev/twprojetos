@@ -2,7 +2,9 @@ package br.com.treinaweb.twprojetos.controller;
 
 import br.com.treinaweb.twprojetos.dto.AlertDTO;
 import br.com.treinaweb.twprojetos.entities.Cliente;
+import br.com.treinaweb.twprojetos.exceptions.ClientePossuiProjetosException;
 import br.com.treinaweb.twprojetos.repository.ClienteRepository;
+import br.com.treinaweb.twprojetos.services.ClienteService;
 import br.com.treinaweb.twprojetos.validators.ClienteValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,9 @@ public class ClienteController {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    @Autowired
+    private ClienteService clienteService;
+
     @InitBinder("cliente")
     public void initBinder(WebDataBinder binder) {
         binder.addValidators(new ClienteValidator(clienteRepository));
@@ -31,7 +36,7 @@ public class ClienteController {
     @GetMapping
     public ModelAndView home() {
         ModelAndView modelAndView = new ModelAndView("cliente/home");
-        modelAndView.addObject("clientes", clienteRepository.findAll());
+        modelAndView.addObject("clientes", clienteService.buscarTodos());
 
         return modelAndView;
     }
@@ -39,7 +44,7 @@ public class ClienteController {
     @GetMapping("/{id}")
     public ModelAndView detalhes(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("cliente/detalhes");
-        modelAndView.addObject("cliente", clienteRepository.getOne(id));
+        modelAndView.addObject("cliente", clienteService.buscarPorId(id));
 
         return modelAndView;
 
@@ -60,7 +65,7 @@ public class ClienteController {
             return "cliente/formulario";
         }
 
-        clienteRepository.save(cliente);
+        clienteService.cadastrar(cliente);
         attr.addFlashAttribute("alert",new AlertDTO("Cliente cadastrado com sucesso!", "alert-warning"));
         return "redirect:/clientes";
     }
@@ -69,8 +74,8 @@ public class ClienteController {
     public ModelAndView editar(@PathVariable Long id) {
 
         ModelAndView modelAndView = new ModelAndView("cliente/formulario");
-        Optional<Cliente> clienteId = clienteRepository.findById(id);
-        modelAndView.addObject("cliente", clienteId.get());
+        Cliente clienteId = clienteService.buscarPorId(id);
+        modelAndView.addObject("cliente", clienteId);
 
         return modelAndView;
     }
@@ -82,15 +87,21 @@ public class ClienteController {
             return "cliente/formulario";
         }
 
-        clienteRepository.save(cliente);
+        clienteService.atualizar(cliente, cliente.getId());
         attr.addFlashAttribute("alert",new AlertDTO("Cliente editado com sucesso!", "alert-warning"));
         return "redirect:/clientes";
     }
 
     @GetMapping("/{id}/excluir")
     public String excluir(@PathVariable Long id, RedirectAttributes attr) {
-        clienteRepository.deleteById(id);
-        attr.addFlashAttribute("alert",new AlertDTO("Cliente excluído com sucesso!", "alert-success"));
+        try{
+            clienteService.excluirPorId(id);
+            attr.addFlashAttribute("alert",new AlertDTO("Cliente excluído com sucesso!", "alert-success"));
+        }catch (ClientePossuiProjetosException e) {
+            attr.addFlashAttribute("alert",new AlertDTO("Cliente não pode ser excluído, pois possui projeto(s) relacionados!", "alert-danger"));
+        }
+
+
         return "redirect:/clientes";
     }
 }

@@ -26,7 +26,7 @@ public class Funcionario extends Pessoa {
     @Column(name = "data_demissao")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dataDemissao;
-    @ManyToMany(mappedBy = "equipe")
+    @ManyToMany(mappedBy = "equipe", fetch = FetchType.EAGER)
     private List<Projeto> projetos;
     @Column(nullable = false)
     private String senha;
