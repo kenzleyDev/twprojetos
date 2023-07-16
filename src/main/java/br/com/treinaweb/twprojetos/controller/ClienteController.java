@@ -8,7 +8,6 @@ import br.com.treinaweb.twprojetos.services.ClienteService;
 import br.com.treinaweb.twprojetos.validators.ClienteValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/clientes")
@@ -26,11 +24,13 @@ public class ClienteController {
     private ClienteRepository clienteRepository;
 
     @Autowired
+    private ClienteValidator clienteValidator;
+    @Autowired
     private ClienteService clienteService;
 
     @InitBinder("cliente")
     public void initBinder(WebDataBinder binder) {
-        binder.addValidators(new ClienteValidator(clienteRepository));
+        binder.addValidators(clienteValidator);
     }
 
     @GetMapping
