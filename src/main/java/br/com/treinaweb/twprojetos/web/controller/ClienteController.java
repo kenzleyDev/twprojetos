@@ -1,4 +1,4 @@
-package br.com.treinaweb.twprojetos.controller;
+package br.com.treinaweb.twprojetos.web.controller;
 
 import br.com.treinaweb.twprojetos.dto.AlertDTO;
 import br.com.treinaweb.twprojetos.entities.Cliente;
