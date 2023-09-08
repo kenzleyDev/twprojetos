@@ -8,6 +8,8 @@ import br.com.treinaweb.twprojetos.exceptions.CargoPossuiFuncionariosException;
 import br.com.treinaweb.twprojetos.repository.CargoRepository;
 import br.com.treinaweb.twprojetos.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +26,9 @@ public class CargoService {
     @Autowired
     private CargoMapper cargoMapper;
 
-
+    public Page<Cargo> buscarTodos(Pageable paginacao) {
+        return cargoRepository.findAll(paginacao);
+    }
     public List<Cargo> buscarTodos() {
         return cargoRepository.findAll();
     }

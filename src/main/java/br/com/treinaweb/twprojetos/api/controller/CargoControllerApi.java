@@ -5,6 +5,10 @@ import br.com.treinaweb.twprojetos.api.hatoas.CargoAssembler;
 import br.com.treinaweb.twprojetos.entities.Cargo;
 import br.com.treinaweb.twprojetos.services.CargoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
@@ -12,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/cargos")
@@ -24,10 +27,13 @@ public class CargoControllerApi {
     @Autowired
     private CargoAssembler cargoAssembler;
 
+    @Autowired
+    private PagedResourcesAssembler<Cargo> pagedResourcesAssembler;
+
     @GetMapping
-    public CollectionModel<EntityModel<Cargo>> buscarTodos() {
-        List<Cargo> cargoList = cargoService.buscarTodos();
-        return cargoAssembler.toCollectionModel(cargoList);
+    public CollectionModel<EntityModel<Cargo>> buscarTodos(Pageable paginacao) {
+        Page<Cargo> cargoList = cargoService.buscarTodos(paginacao);
+        return pagedResourcesAssembler.toModel(cargoList, cargoAssembler);
     }
 
     @GetMapping("/{id}")

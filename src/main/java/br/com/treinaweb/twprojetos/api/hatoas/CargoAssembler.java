@@ -41,7 +41,7 @@ public class CargoAssembler implements SimpleRepresentationModelAssembler<Cargo>
                 .withSelfRel()
                 .withType("POST");
 
-        Link selfLink = linkTo(methodOn(CargoControllerApi.class).buscarTodos())
+        Link selfLink = linkTo(methodOn(CargoControllerApi.class).buscarTodos(null))
                 .withSelfRel()
                         .withType("GET");
 

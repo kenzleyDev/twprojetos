@@ -6,6 +6,8 @@ import br.com.treinaweb.twprojetos.exceptions.ClientePossuiProjetosException;
 import br.com.treinaweb.twprojetos.repository.ClienteRepository;
 import br.com.treinaweb.twprojetos.repository.ProjetoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +20,11 @@ public class ClienteService {
 
     @Autowired
     private ProjetoRepository projetoRepository;
+
+    public Page<Cliente> buscarTodos(Pageable pagination) {
+        return clienteRepository.findAll(pagination);
+    }
+
 
     public List<Cliente> buscarTodos() {
         return clienteRepository.findAll();

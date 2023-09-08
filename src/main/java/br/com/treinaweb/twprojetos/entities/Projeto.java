@@ -1,7 +1,9 @@
 package br.com.treinaweb.twprojetos.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
+import org.springframework.hateoas.server.core.Relation;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -13,6 +15,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Relation(collectionRelation = "projetos")
 public class Projeto extends Entidade {
 
     @NotNull
@@ -34,10 +37,13 @@ public class Projeto extends Entidade {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dataFim;
 
+    @JsonIgnore
     @Valid
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id_fk", nullable = false)
     private Cliente cliente;
+
+    @JsonIgnore
     @Valid
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
@@ -54,6 +60,7 @@ public class Projeto extends Entidade {
     @NumberFormat(style = NumberFormat.Style.CURRENCY, pattern = "#,##0.00")
     private BigDecimal gastos;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "projeto_funcionario",
