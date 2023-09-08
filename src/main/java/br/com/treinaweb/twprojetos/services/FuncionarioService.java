@@ -8,6 +8,8 @@ import br.com.treinaweb.twprojetos.repository.FuncionarioRepository;
 import br.com.treinaweb.twprojetos.repository.ProjetoRepository;
 import br.com.treinaweb.twprojetos.utils.SenhaUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +23,9 @@ public class FuncionarioService {
     @Autowired
     private ProjetoRepository projetoRepository;
 
+    public Page<Funcionario> buscarTodos(Pageable pageable) {
+        return funcionarioRepository.findAll(pageable);
+    }
     public List<Funcionario> buscarTodos() {
         return funcionarioRepository.findAll();
     }

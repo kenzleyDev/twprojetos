@@ -1,6 +1,8 @@
 package br.com.treinaweb.twprojetos.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.hateoas.server.core.Relation;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -10,6 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Relation(collectionRelation = "funcionarios")
 public class Funcionario extends Pessoa {
 
     @NotNull
@@ -17,6 +20,7 @@ public class Funcionario extends Pessoa {
     @Column(name = "data_admissao", nullable = false)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dataAdmissao;
+    @JsonIgnore
     @Valid
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
@@ -26,8 +30,12 @@ public class Funcionario extends Pessoa {
     @Column(name = "data_demissao")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dataDemissao;
+
+    @JsonIgnore
     @ManyToMany(mappedBy = "equipe", fetch = FetchType.EAGER)
     private List<Projeto> projetos;
+
+    @JsonIgnore
     @Column(nullable = false)
     private String senha;
 
