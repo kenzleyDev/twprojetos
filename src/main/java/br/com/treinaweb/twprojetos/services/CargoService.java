@@ -1,5 +1,7 @@
 package br.com.treinaweb.twprojetos.services;
 
+import br.com.treinaweb.twprojetos.api.dto.CargoDTO;
+import br.com.treinaweb.twprojetos.api.mapper.CargoMapper;
 import br.com.treinaweb.twprojetos.entities.Cargo;
 import br.com.treinaweb.twprojetos.exceptions.CargoNaoEncontradoException;
 import br.com.treinaweb.twprojetos.exceptions.CargoPossuiFuncionariosException;
@@ -19,6 +21,9 @@ public class CargoService {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
 
+    @Autowired
+    private CargoMapper cargoMapper;
+
 
     public List<Cargo> buscarTodos() {
         return cargoRepository.findAll();
@@ -31,10 +36,19 @@ public class CargoService {
         return cargoEncontrado;
     }
 
+    public Cargo cadastrar(CargoDTO cargoDTO) {
+        return cargoRepository.save(cargoMapper.mapToEntity(cargoDTO));
+    }
     public Cargo cadastrar(Cargo cargo) {
         return cargoRepository.save(cargo);
     }
 
+    public Cargo atualizar(CargoDTO cargoDTO, Long id) {
+        buscarPorId(id);
+        Cargo cargo = cargoMapper.mapToEntity(cargoDTO);
+        cargo.setId(id);
+        return cargoRepository.save(cargo);
+    }
     public Cargo atualizar(Cargo cargo, Long id) {
         buscarPorId(id);
         return cargoRepository.save(cargo);
