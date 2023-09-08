@@ -1,6 +1,7 @@
 package br.com.treinaweb.twprojetos.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,7 +10,7 @@ import javax.persistence.MappedSuperclass;
 import java.util.Objects;
 
 @MappedSuperclass
-public abstract class Entidade {
+public abstract class Entidade extends RepresentationModel<Entidade> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
