@@ -2,8 +2,7 @@ package br.com.treinaweb.twprojetos.web.controller;
 
 import br.com.treinaweb.twprojetos.dto.AlertDTO;
 import br.com.treinaweb.twprojetos.entities.Cargo;
-import br.com.treinaweb.twprojetos.exceptions.CargoPossuiFuncionariosException;
-import br.com.treinaweb.twprojetos.repository.CargoRepository;
+import br.com.treinaweb.twprojetos.web.exceptions.CargoPossuiFuncionariosException;
 import br.com.treinaweb.twprojetos.services.CargoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/cargos")

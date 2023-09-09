@@ -2,7 +2,7 @@ package br.com.treinaweb.twprojetos.web.controller;
 
 import br.com.treinaweb.twprojetos.dto.AlertDTO;
 import br.com.treinaweb.twprojetos.entities.Cliente;
-import br.com.treinaweb.twprojetos.exceptions.ClientePossuiProjetosException;
+import br.com.treinaweb.twprojetos.web.exceptions.ClientePossuiProjetosException;
 import br.com.treinaweb.twprojetos.repository.ClienteRepository;
 import br.com.treinaweb.twprojetos.services.ClienteService;
 import br.com.treinaweb.twprojetos.validators.ClienteValidator;

@@ -5,7 +5,7 @@ import br.com.treinaweb.twprojetos.api.dto.ProjetoDTO;
 import br.com.treinaweb.twprojetos.api.mapper.ProjetoMapper;
 import br.com.treinaweb.twprojetos.entities.Funcionario;
 import br.com.treinaweb.twprojetos.entities.Projeto;
-import br.com.treinaweb.twprojetos.exceptions.ProjetoNaoEncontradoException;
+import br.com.treinaweb.twprojetos.web.exceptions.ProjetoNaoEncontradoException;
 import br.com.treinaweb.twprojetos.repository.ProjetoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

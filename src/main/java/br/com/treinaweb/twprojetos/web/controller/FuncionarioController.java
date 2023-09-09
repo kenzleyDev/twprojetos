@@ -2,7 +2,7 @@ package br.com.treinaweb.twprojetos.web.controller;
 
 import br.com.treinaweb.twprojetos.dto.AlertDTO;
 import br.com.treinaweb.twprojetos.entities.Funcionario;
-import br.com.treinaweb.twprojetos.exceptions.FuncionarioEhLiderDeProjetoException;
+import br.com.treinaweb.twprojetos.web.exceptions.FuncionarioEhLiderDeProjetoException;
 import br.com.treinaweb.twprojetos.services.CargoService;
 import br.com.treinaweb.twprojetos.services.FuncionarioService;
 import br.com.treinaweb.twprojetos.validators.FuncionarioValidator;

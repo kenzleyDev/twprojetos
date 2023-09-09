@@ -1,15 +1,16 @@
-package br.com.treinaweb.twprojetos.exceptions;
+package br.com.treinaweb.twprojetos.web.exceptions;
 
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorViewResolver;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-@ControllerAdvice
-public class GerenciadorDeExceptions implements ErrorViewResolver {
+@ControllerAdvice(annotations = Controller.class)
+public class GerenciadorDeExceptionsWeb implements ErrorViewResolver {
 
     @Override
     public ModelAndView resolveErrorView(HttpServletRequest request, HttpStatus status, Map<String, Object> model) {

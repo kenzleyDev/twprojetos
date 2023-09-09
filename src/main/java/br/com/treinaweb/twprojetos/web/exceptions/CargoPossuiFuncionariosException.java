@@ -1,4 +1,4 @@
-package br.com.treinaweb.twprojetos.exceptions;
+package br.com.treinaweb.twprojetos.web.exceptions;
 
 public class CargoPossuiFuncionariosException extends RuntimeException{
 

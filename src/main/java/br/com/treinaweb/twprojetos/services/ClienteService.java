@@ -1,8 +1,8 @@
 package br.com.treinaweb.twprojetos.services;
 
 import br.com.treinaweb.twprojetos.entities.Cliente;
-import br.com.treinaweb.twprojetos.exceptions.ClienteNaoEncontradoException;
-import br.com.treinaweb.twprojetos.exceptions.ClientePossuiProjetosException;
+import br.com.treinaweb.twprojetos.web.exceptions.ClienteNaoEncontradoException;
+import br.com.treinaweb.twprojetos.web.exceptions.ClientePossuiProjetosException;
 import br.com.treinaweb.twprojetos.repository.ClienteRepository;
 import br.com.treinaweb.twprojetos.repository.ProjetoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

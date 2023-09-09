@@ -2,8 +2,8 @@ package br.com.treinaweb.twprojetos.services;
 
 import br.com.treinaweb.twprojetos.entities.Funcionario;
 import br.com.treinaweb.twprojetos.entities.Projeto;
-import br.com.treinaweb.twprojetos.exceptions.FuncionarioEhLiderDeProjetoException;
-import br.com.treinaweb.twprojetos.exceptions.FuncionarioNaoEncontradoException;
+import br.com.treinaweb.twprojetos.web.exceptions.FuncionarioEhLiderDeProjetoException;
+import br.com.treinaweb.twprojetos.web.exceptions.FuncionarioNaoEncontradoException;
 import br.com.treinaweb.twprojetos.repository.FuncionarioRepository;
 import br.com.treinaweb.twprojetos.repository.ProjetoRepository;
 import br.com.treinaweb.twprojetos.utils.SenhaUtils;

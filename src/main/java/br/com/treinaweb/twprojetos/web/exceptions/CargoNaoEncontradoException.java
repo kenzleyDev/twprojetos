@@ -1,4 +1,4 @@
-package br.com.treinaweb.twprojetos.exceptions;
+package br.com.treinaweb.twprojetos.web.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
